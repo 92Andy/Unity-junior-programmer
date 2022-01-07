@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRB;
+    private Animator playerAnim;
     private bool isOnGround = true;
     public bool isGameOver = false;
 
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRB = GetComponent<Rigidbody>();
+        playerAnim = GetComponent<Animator>();
         Physics.gravity *= gravityModifier;
     }
 
@@ -23,9 +25,15 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Space) && isOnGround)
         {
-            playerRB.AddForce(Vector3.up * jumpForce, mode: ForceMode.Impulse);
-            isOnGround = false;
+            PlayerJump();
         }
+    }
+
+    private void PlayerJump()
+    {
+        playerRB.AddForce(Vector3.up * jumpForce, mode: ForceMode.Impulse);
+        isOnGround = false;
+        playerAnim.SetTrigger("Jump_trig");
     }
 
     private void OnCollisionEnter(Collision collision)
