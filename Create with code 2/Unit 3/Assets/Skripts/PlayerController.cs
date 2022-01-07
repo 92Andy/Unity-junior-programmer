@@ -6,6 +6,9 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRB;
     private Animator playerAnim;
+
+    public ParticleSystem explosionParticle;
+
     private bool isOnGround = true;
     public bool isGameOver = false;
 
@@ -51,6 +54,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Game over!");
         isGameOver = true;
+        explosionParticle.Play();
         playerAnim.SetInteger("DeathType_int", 1);
         playerAnim.SetBool("Death_b", true);
     }
