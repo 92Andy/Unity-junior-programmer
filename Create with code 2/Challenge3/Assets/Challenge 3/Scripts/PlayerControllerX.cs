@@ -51,14 +51,16 @@ public class PlayerControllerX : MonoBehaviour
             gameOver = true;
             Debug.Log("Game Over!");
             Destroy(other.gameObject);
-        } 
-
-        // if player collides with money, fireworks
-        else if (other.gameObject.CompareTag("Money"))
+        }
+        else if (other.gameObject.CompareTag("Money")) // if player collides with money, firework
         {
             fireworksParticle.Play();
             playerAudio.PlayOneShot(moneySound, 1.0f);
             Destroy(other.gameObject);
+        }
+        else if(other.gameObject.CompareTag("Ground"))
+        {
+            playerRb.AddForce(Vector3.up * 5, ForceMode.Impulse);
         }
 
     }
