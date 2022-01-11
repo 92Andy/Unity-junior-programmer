@@ -21,12 +21,13 @@ public class PlayerControllerX : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Start()");
         Physics.gravity *= gravityModifier;
         playerAudio = GetComponent<AudioSource>();
+        playerRb = GetComponent<Rigidbody>();
 
         // Apply a small upward force at the start of the game
         playerRb.AddForce(Vector3.up * 5, ForceMode.Impulse);
-
     }
 
     // Update is called once per frame
