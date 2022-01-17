@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 
     public bool pickedPowerUp = false;
     private float powerUpStrength = 10f;
+    public GameObject powerUpIndicator;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +24,9 @@ public class PlayerController : MonoBehaviour
         var verticalInput = Input.GetAxis("Vertical");
         Vector3 direction = focalPoint.transform.forward;
         playerRb.AddForce(direction * verticalInput * speed);
+
+        //Update powerUp indicator position
+        powerUpIndicator.transform.position = (transform.position - new Vector3(0, 0.5f, 0));
     }
 
     private void OnTriggerEnter(Collider other)
@@ -44,9 +48,11 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator HandlePowerUpPickedRoutine()
     {
+        powerUpIndicator.gameObject.SetActive(true);
         pickedPowerUp = true;
         yield return new WaitForSeconds(7);
         pickedPowerUp = false;
+        powerUpIndicator.gameObject.SetActive(false);
     }
 
     private void PushEnemyAway(GameObject enemy)
