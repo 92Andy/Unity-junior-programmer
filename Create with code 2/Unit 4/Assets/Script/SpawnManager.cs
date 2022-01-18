@@ -6,7 +6,7 @@ public class SpawnManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
 
-    private float xzSpawnBoundery = 9f;
+    public GameObject powerUpPrefab;
 
     private int waveCounter = 1;
 
@@ -22,8 +22,19 @@ public class SpawnManager : MonoBehaviour
         if(enemyCount == 0)
         {
             SpawnEnemyWaves(waveCounter);
+            SpawnPowerUp();
             waveCounter++;
         }
+    }
+
+    private void SpawnPowerUp()
+    {
+        var randomPos = GenerateRandomPosition(6f);
+
+        if (powerUpPrefab == null)
+            throw new MissingReferenceException("Prefab for power-up was not found!");
+        else
+            Instantiate(powerUpPrefab, randomPos, powerUpPrefab.transform.rotation);
     }
 
     private void SpawnEnemyWaves(int amountOfWaves)
@@ -36,7 +47,7 @@ public class SpawnManager : MonoBehaviour
 
     private void SpawnEnemyOnRandomPos()
     {
-        var randomPos = GenerateRandomPosition();
+        var randomPos = GenerateRandomPosition(9f);
 
         if (enemyPrefab == null)
             throw new MissingReferenceException("Prefab for enemy was not found!");
@@ -44,10 +55,10 @@ public class SpawnManager : MonoBehaviour
             Instantiate(enemyPrefab, randomPos, enemyPrefab.transform.rotation);
     }
 
-    private Vector3 GenerateRandomPosition()
+    private Vector3 GenerateRandomPosition(float boundery)
     {
-        var randomXPos = Random.Range(-xzSpawnBoundery, xzSpawnBoundery);
-        var randomZPos = Random.Range(-xzSpawnBoundery, xzSpawnBoundery);
+        var randomXPos = Random.Range(-boundery, boundery);
+        var randomZPos = Random.Range(-boundery, boundery);
         return new Vector3(randomXPos, 0, randomZPos);
     }
 }
