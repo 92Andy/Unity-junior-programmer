@@ -8,16 +8,30 @@ public class SpawnManager : MonoBehaviour
 
     private float xzSpawnBoundery = 9f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        SpawnEnemyOnRandomPos();
-    }
+    private int waveCounter = 1;
 
     // Update is called once per frame
     void Update()
     {
-        
+        HandleWave();
+    }
+
+    private void HandleWave()
+    {
+        var enemyCount = FindObjectsOfType<Enemy>().Length;
+        if(enemyCount == 0)
+        {
+            SpawnEnemyWaves(waveCounter);
+            waveCounter++;
+        }
+    }
+
+    private void SpawnEnemyWaves(int amountOfWaves)
+    {
+        for(int i = 0; i < amountOfWaves; i++)
+        {
+            SpawnEnemyOnRandomPos();
+        }
     }
 
     private void SpawnEnemyOnRandomPos()
