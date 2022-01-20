@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyX : MonoBehaviour
 {
-    public float speed = 20f;
+    private float speed = 1f;
     private Rigidbody enemyRb;
     private GameObject playerGoal;
 
@@ -20,9 +20,12 @@ public class EnemyX : MonoBehaviour
     {
         // Set enemy direction towards player goal and move there
         Vector3 lookDirection = (playerGoal.transform.position - transform.position).normalized;
-        enemyRb.AddForce(lookDirection * speed * Time.deltaTime);
+        enemyRb.AddForce(lookDirection * speed);
+        Debug.Log("enemy speed: " + speed);
 
     }
+
+    public void IncreaseTheSpeedBy(float extraSpeed) => speed += extraSpeed;
 
     private void OnCollisionEnter(Collision other)
     {
