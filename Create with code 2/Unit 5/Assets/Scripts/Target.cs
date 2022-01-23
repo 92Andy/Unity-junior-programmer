@@ -6,6 +6,8 @@ using UnityEngine;
 public class Target : MonoBehaviour
 {
     public int pointValue = 0;
+    public ParticleSystem explosionEffect;
+
     private Rigidbody targetRb;
     private GameManager gameManager;
     private float spawnYPos = -2;
@@ -54,6 +56,11 @@ public class Target : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if(explosionEffect != null)
+        {
+            Debug.Log("explosion animation statet -> " + explosionEffect.gameObject.transform.position);
+            explosionEffect.Play();
+        }
         Destroy(gameObject);
         gameManager.UpdateScore(pointValue);
     }
