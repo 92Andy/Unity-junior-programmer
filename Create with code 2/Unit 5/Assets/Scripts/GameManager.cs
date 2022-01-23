@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public List<GameObject> targets = new List<GameObject>();
+    public TextMeshProUGUI scoreTMP;
 
     private float spawnRate = 1f;
+    private int score = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +18,8 @@ public class GameManager : MonoBehaviour
         if (targets.Count == 0)
             throw new MissingComponentException("Their are no Targets!");
         StartCoroutine(SpawnTargets());
+
+        UpdateScore(0);
     }
 
     private IEnumerator SpawnTargets()
@@ -27,9 +32,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateScore(int scoreToAdd)
     {
-        
+        score += scoreToAdd;
+        scoreTMP.text = "Score: " + score.ToString();
     }
 }

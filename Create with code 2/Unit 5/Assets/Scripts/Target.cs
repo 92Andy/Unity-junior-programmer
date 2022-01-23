@@ -5,14 +5,17 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
+    public int pointValue = 0;
     private Rigidbody targetRb;
-
+    private GameManager gameManager;
     private float spawnYPos = -2;
 
     // Start is called before the first frame update
     void Start()
     {
         targetRb = GetComponent<Rigidbody>();
+        gameManager = GameObject.Find("GameManager")
+            .GetComponent<GameManager>();
         SpawnAndMoveTarget();
     }
 
@@ -33,7 +36,7 @@ public class Target : MonoBehaviour
 
     private Vector3 RandomSpawnPos()
     {
-        return new Vector3(UnityEngine.Random.Range(-10f, 10f), spawnYPos);
+        return new Vector3(UnityEngine.Random.Range(-8f, 8f), spawnYPos);
     }
 
     private Vector3 RandomUpForce()
@@ -52,5 +55,6 @@ public class Target : MonoBehaviour
     private void OnMouseDown()
     {
         Destroy(gameObject);
+        gameManager.UpdateScore(pointValue);
     }
 }
