@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     public void UpdateScore(int scoreToAdd)
     {
         score += scoreToAdd;
+        if (score < 0)
+            score = 0;
         scoreTMP.text = "Score: " + score.ToString();
     }
 }
