@@ -58,8 +58,7 @@ public class Target : MonoBehaviour
     {
         if(explosionEffect != null)
         {
-            Debug.Log("explosion animation statet -> " + explosionEffect.gameObject.transform.position);
-            explosionEffect.Play();
+            Instantiate(explosionEffect, transform.position, transform.rotation);
         }
         Destroy(gameObject);
         gameManager.UpdateScore(pointValue);
