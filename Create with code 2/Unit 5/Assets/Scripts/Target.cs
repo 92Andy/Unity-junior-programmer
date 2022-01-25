@@ -57,10 +57,12 @@ public class Target : MonoBehaviour
     private void OnMouseDown()
     {
         if(explosionEffect != null)
-        {
             Instantiate(explosionEffect, transform.position, transform.rotation);
-        }
+
         Destroy(gameObject);
         gameManager.UpdateScore(pointValue);
+
+        if (gameObject.CompareTag("Bad"))
+            gameManager.ReduceLive();
     }
 }

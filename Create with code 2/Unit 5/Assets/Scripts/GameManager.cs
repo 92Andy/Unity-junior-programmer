@@ -8,9 +8,11 @@ public class GameManager : MonoBehaviour
 {
     public List<GameObject> targets = new List<GameObject>();
     public TextMeshProUGUI scoreTMP;
+    public TextMeshProUGUI liveTmp;
 
     private float spawnRate = 1f;
     private int score = 0;
+    private int amountOfLive = 3;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(SpawnTargets());
 
         UpdateScore(0);
+        UpdateLiveTmpText(amountOfLive);
     }
 
     private IEnumerator SpawnTargets()
@@ -38,5 +41,32 @@ public class GameManager : MonoBehaviour
         if (score < 0)
             score = 0;
         scoreTMP.text = "Score: " + score.ToString();
+    }
+
+    private void UpdateLiveTmpText(int live)
+    {
+        if (live == 0)
+            liveTmp.text = string.Empty;
+
+        var tmpLiveText = string.Empty;
+        for(int i = 0; i < live; i++)
+        {
+            tmpLiveText += " |";
+        }
+
+        liveTmp.text = tmpLiveText;
+    }
+
+    public void ReduceLive()
+    {
+        if (amountOfLive == 0)
+            GameOver();
+        amountOfLive--;
+        UpdateLiveTmpText(amountOfLive);
+    }
+
+    private void GameOver()
+    {
+        Debug.Log("GameOver");
     }
 }
