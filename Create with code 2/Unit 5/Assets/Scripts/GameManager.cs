@@ -8,7 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public List<GameObject> targets = new List<GameObject>();
     public TextMeshProUGUI scoreTMP;
-    public TextMeshProUGUI liveTmp;
+    public TextMeshProUGUI liveTMP;
+    public TextMeshProUGUI gameOverTMP;
 
     private float spawnRate = 1f;
     private int score = 0;
@@ -46,7 +47,7 @@ public class GameManager : MonoBehaviour
     private void UpdateLiveTmpText(int live)
     {
         if (live == 0)
-            liveTmp.text = string.Empty;
+            liveTMP.text = string.Empty;
 
         var tmpLiveText = string.Empty;
         for(int i = 0; i < live; i++)
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
             tmpLiveText += " |";
         }
 
-        liveTmp.text = tmpLiveText;
+        liveTMP.text = tmpLiveText;
     }
 
     public void ReduceLive()
@@ -68,5 +69,7 @@ public class GameManager : MonoBehaviour
     private void GameOver()
     {
         Debug.Log("GameOver");
+        gameOverTMP.gameObject.SetActive(true);
+        Time.timeScale = 0;
     }
 }
