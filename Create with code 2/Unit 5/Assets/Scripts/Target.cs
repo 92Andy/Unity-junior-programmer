@@ -56,6 +56,9 @@ public class Target : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if (!gameManager.isGameActive)
+            return;
+
         if(explosionEffect != null)
             Instantiate(explosionEffect, transform.position, transform.rotation);
 

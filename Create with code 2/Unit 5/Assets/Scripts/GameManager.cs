@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI liveTMP;
     public TextMeshProUGUI gameOverTMP;
 
+    public bool isGameActive;
+
     private float spawnRate = 1f;
     private int score = 0;
     private int amountOfLive = 3;
@@ -18,6 +20,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        isGameActive = true;
+
         if (targets.Count == 0)
             throw new MissingComponentException("Their are no Targets!");
         StartCoroutine(SpawnTargets());
@@ -28,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SpawnTargets()
     {
-        while (true)
+        while (isGameActive)
         {
             yield return new WaitForSeconds(spawnRate);
             var randomIndex = Random.Range(0, targets.Count);
@@ -70,6 +74,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameOver");
         gameOverTMP.gameObject.SetActive(true);
-        Time.timeScale = 0;
+        isGameActive = false;
     }
 }
