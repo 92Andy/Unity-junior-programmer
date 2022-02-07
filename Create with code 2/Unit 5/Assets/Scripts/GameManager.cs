@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreTMP;
     public TextMeshProUGUI liveTMP;
     public TextMeshProUGUI gameOverTMP;
+    public Button restartButton;
 
     public bool isGameActive;
 
@@ -75,11 +77,15 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("GameOver");
         gameOverTMP.gameObject.SetActive(true);
+        restartButton.gameObject.SetActive(true);
         isGameActive = false;
     }
 
     public void RestartGame()
     {
-        Debug.Log("Restart tapped");
+        Debug.Log("Restart");
+        gameOverTMP.gameObject.SetActive(false);
+        restartButton.gameObject.SetActive(false);
+
     }
 }
