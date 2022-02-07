@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -75,5 +76,10 @@ public class GameManager : MonoBehaviour
         Debug.Log("GameOver");
         gameOverTMP.gameObject.SetActive(true);
         isGameActive = false;
+    }
+
+    public void RestartGame()
+    {
+        Debug.Log("Restart tapped");
     }
 }
