@@ -84,8 +84,6 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         Debug.Log("Restart");
-        gameOverTMP.gameObject.SetActive(false);
-        restartButton.gameObject.SetActive(false);
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
