@@ -20,8 +20,9 @@ public class GameManager : MonoBehaviour
     private int score = 0;
     private int amountOfLive = 3;
 
-    public void StartGame()
+    public void StartGame(int difficulty)
     {
+        spawnRate /= difficulty;
         isGameActive = true;
 
         if (targets.Count == 0)
