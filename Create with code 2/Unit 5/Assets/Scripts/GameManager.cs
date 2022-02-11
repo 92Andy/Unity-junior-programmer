@@ -20,8 +20,7 @@ public class GameManager : MonoBehaviour
     private int score = 0;
     private int amountOfLive = 3;
 
-    // Start is called before the first frame update
-    void Start()
+    public void StartGame()
     {
         isGameActive = true;
 
